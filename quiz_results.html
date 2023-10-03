@@ -53,12 +53,15 @@
                             <h1 class="text-center" id="resultText"></h1>
                             <h2 class="text-center" id="passFailText"></h2>
                             <h3 class="text-center" id="scoreText"></h3>
-                            <!-- Additional content for displaying badges, retry buttons, etc. -->
+
+                            <div class="text-center" id="badgeImageDiv">
+                                <img src="./img/media-badge.png" alt="Badge" id="badgeImage" style="display: none; width: 100px">
+                            </div> <br>
+
                             <div class="text-center">
                                 <a href="quiz-media.html" class="btn btn-primary">Try Again</a>
                             </div>
 
-                            <!-- Button to go to the homepage -->
                             <div class="text-center mt-3">
                                 <a href="index.html" class="btn btn-primary">Go to Homepage</a>
                             </div>
@@ -79,6 +82,11 @@
                 document.getElementById("resultText").textContent = resultText;
                 document.getElementById("passFailText").textContent = passFailText;
                 document.getElementById("scoreText").textContent = scoreText;
+
+                const score = parseInt(scoreText.match(/\d+/)[0]); // Extract the score value
+                if (score >= 7) {
+                    document.getElementById("badgeImage").style.display = "inline-block";
+                }
             });
         </script>
 

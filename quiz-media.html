@@ -320,7 +320,7 @@
         </div>
         <!-- Quiz Submit Button -->
         <center>
-          <button type="button" class="btn btn-primary mt-4" onclick="calculateScore();">
+          <button type="button" class="btn btn-primary mt-4" id="submitQuizButton" onclick="calculateScore();">
             Submit Quiz
           </button>
         </center>
@@ -396,6 +396,34 @@
 
 
     <script>
+
+      // Function to check if all questions are answered
+      function areAllQuestionsAnswered() {
+        const questions = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10'];
+
+        for (const question of questions) {
+          const selectedOption = document.querySelector(`input[name=${question}]:checked`);
+          if (!selectedOption) {
+            return false; // At least one question is not answered
+          }
+        }
+        return true; // All questions are answered
+      }
+
+      // Enable or disable the submit button based on whether all questions are answered
+      document.addEventListener("DOMContentLoaded", function () {
+        const submitButton = document.getElementById("submitQuizButton");
+        submitButton.disabled = !areAllQuestionsAnswered();
+
+        // Add event listeners to radio buttons to dynamically enable/disable the submit button
+        const radioButtons = document.querySelectorAll("input[type=radio]");
+        radioButtons.forEach((radioButton) => {
+          radioButton.addEventListener("change", function () {
+            submitButton.disabled = !areAllQuestionsAnswered();
+          });
+        });
+      });
+
       function calculateScore() {
         const correctAnswers = {
           'q1': 'a',
